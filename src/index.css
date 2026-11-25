@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Roma tokens from the Figma variables. RGB triplets so Tailwind can apply opacity. */
+:root,
+[data-brand='green'] {
+  --ink: 5 5 5;
+  --ink-2: 107 107 107;
+  --ink-3: 126 126 126;
+  --ink-faint: 179 179 179;
+  --canvas: 255 255 255;
+  --select: 243 243 243;
+  --hair: 226 226 226;
+  --hair-strong: 212 212 212;
+
+  --primary: 15 107 52;
+  --primary-press: 10 91 41;
+  --primary-ink: 10 91 41;
+  --on-primary: 255 255 255;
+  --primary-wash: rgba(15, 107, 52, 0.08);
+  --sidebar: 236 240 236;
+
+  --red: 198 40 40;
+  --amber: 180 83 9;
+  --green: 46 125 50;
+  --red-wash: rgba(198, 40, 40, 0.08);
+  --amber-wash: rgba(180, 83, 9, 0.1);
+  --green-wash: rgba(46, 125, 50, 0.08);
+}
+
+[data-brand='yellow'] {
+  --primary: 255 207 51;
+  --primary-press: 224 168 0;
+  --primary-ink: 122 92 0;
+  --on-primary: 5 5 5;
+  --primary-wash: rgba(245, 184, 0, 0.14);
+  --sidebar: 247 244 234;
+  /* amber shifts to orange so it never reads as the brand yellow */
+  --amber: 194 65 12;
+  --amber-wash: rgba(194, 65, 12, 0.1);
+}
+
+[data-brand='blue'] {
+  --primary: 11 111 184;
+  --primary-press: 8 90 150;
+  --primary-ink: 3 68 135;
+  --on-primary: 255 255 255;
+  --primary-wash: rgba(11, 111, 184, 0.08);
+  --sidebar: 238 243 248;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: rgb(var(--canvas));
+  color: rgb(var(--ink));
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  button {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-hair bg-canvas shadow-card;
+  }
+  .field {
+    @apply h-[44px] w-full rounded-md border border-hair-strong bg-canvas px-3 text-sm text-ink outline-none transition-colors placeholder:text-ink-3 hover:border-ink-faint focus:border-ink;
+  }
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--hair-strong)) transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
